@@ -20,22 +20,22 @@ class Robot {
     switch (this.orientation) {
       case Orientation.NORTH:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x, this.coordinate.y++)
+          new Coordinate(this.coordinate.x, this.coordinate.y + 1)
         );
         break;
       case Orientation.SOUTH:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x, this.coordinate.y--)
+          new Coordinate(this.coordinate.x, this.coordinate.y - 1)
         );
         break;
       case Orientation.EAST:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x++, this.coordinate.y)
+          new Coordinate(this.coordinate.x + 1, this.coordinate.y)
         );
         break;
       case Orientation.WEST:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x--, this.coordinate.y)
+          new Coordinate(this.coordinate.x - 1, this.coordinate.y)
         );
         break;
     }
@@ -45,22 +45,22 @@ class Robot {
     switch (this.orientation) {
       case Orientation.NORTH:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x, this.coordinate.y--)
+          new Coordinate(this.coordinate.x, this.coordinate.y - 1)
         );
         break;
       case Orientation.SOUTH:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x, this.coordinate.y++)
+          new Coordinate(this.coordinate.x, this.coordinate.y + 1)
         );
         break;
       case Orientation.EAST:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x--, this.coordinate.y)
+          new Coordinate(this.coordinate.x - 1, this.coordinate.y)
         );
         break;
       case Orientation.WEST:
         this.changeCoordinateOnPlanet(
-          new Coordinate(this.coordinate.x++, this.coordinate.y)
+          new Coordinate(this.coordinate.x + 1, this.coordinate.y)
         );
         break;
     }
