@@ -19,19 +19,19 @@ const orientations = Object.values(Orientation);
 const orientation = orientations[getRandom(orientations.length, 0)];
 
 const planet = new Planet(sizePlanet);
-let rover = new Robot(impact, orientation, planet);
+const rover = new Robot(impact, orientation, planet);
 
 (async () => {
   const rl = readline.createInterface({ input, output, prompt: "> " });
-  let continueMission = true;
 
-  console.log(rover);
-  while (continueMission) {
+  console.log(rover.toString());
+
+  while (true) {
+    const commands = Object.values(Command).join(", ");
+
     const cmd = (
-      await rl.question("Entrer la commande : ")
+      await rl.question(`\nEntrer la commande (${commands}) : `)
     ).toLowerCase() as Command;
-
-    console.log(cmd);
 
     switch (cmd) {
       case Command.ADVANCE:
@@ -56,7 +56,8 @@ let rover = new Robot(impact, orientation, planet);
 
       case Command.EXIT:
         console.log("Fin de la mission, le robot retourne sur Terre");
-        continueMission = false;
+        rl.close();
+        process.exit();
         break;
 
       default:
@@ -64,9 +65,6 @@ let rover = new Robot(impact, orientation, planet);
         break;
     }
 
-    console.log(rover);
+    console.log(rover.toString());
   }
-
-  rl.close();
-  process.exit();
 })();
