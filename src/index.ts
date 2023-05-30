@@ -1,6 +1,4 @@
-import * as readline from "node:readline/promises";
-import { stdin as input, stdout as output } from "node:process";
-
+import { prompt } from "enquirer";
 import { Command, Orientation } from "./enums/index";
 import { Coordinate, Planet, Robot } from "./classes/index";
 import { getRandom } from "./utils/random";
@@ -22,18 +20,20 @@ const planet = new Planet(sizePlanet);
 const rover = new Robot(impact, orientation, planet);
 
 (async () => {
-  const rl = readline.createInterface({ input, output, prompt: "> " });
-
+  console.log();
   console.log(rover.toString());
 
   while (true) {
-    const commands = Object.values(Command).join(", ");
+    const commands = Object.values(Command);
 
-    const cmd = (
-      await rl.question(`\nEntrer la commande (${commands}) : `)
-    ).toLowerCase() as Command;
+    const cmd = await prompt<{ value: Command }>({
+      name: "value",
+      message: "\nEntrer la commande",
+      type: "select",
+      choices: [...commands],
+    });
 
-    switch (cmd) {
+    switch (cmd.value) {
       case Command.ADVANCE:
         console.log("Le robot avance petit à petit...");
         rover.advance();
@@ -56,15 +56,14 @@ const rover = new Robot(impact, orientation, planet);
 
       case Command.EXIT:
         console.log("Fin de la mission, le robot retourne sur Terre");
-        rl.close();
         process.exit();
-        break;
 
       default:
         console.log("Commande non reconnue");
         break;
     }
 
+    console.log();
     console.log(rover.toString());
   }
 })();
