@@ -103,10 +103,14 @@ class Robot {
   private changeCoordinateOnPlanet(newCoordinate: Coordinate): void {
     if (newCoordinate.x > this.planet.size) {
       newCoordinate.x = 1;
+    } else if (newCoordinate.x < 1) {
+      newCoordinate.x = this.planet.size;
     }
 
     if (newCoordinate.y > this.planet.size) {
       newCoordinate.y = 1;
+    } else if (newCoordinate.y < 1) {
+      newCoordinate.y = this.planet.size;
     }
 
     this.coordinate = newCoordinate;
