@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "@jest/globals";
 
 import { Orientation } from "../src/enums/index";
-import { Coordinate, Planet, Robot } from "../src/classes/index";
+import { Coordinate, Obstacle, Planet, Robot } from "../src/classes/index";
 
 describe("Rover", () => {
   let planet: Planet, rover: Robot;
@@ -77,6 +77,23 @@ describe("Rover", () => {
     rover.turnRight();
     expect(rover.coordinate.y).toEqual(1);
     expect(rover.coordinate.x).toEqual(1);
+    expect(rover.orientation).toEqual(Orientation.NORTH);
+  });
+});
+
+describe("Obstacles", () => {
+  let planet: Planet, rover: Robot;
+
+  beforeEach(() => {
+    planet = new Planet(5, [new Coordinate(1, 3)]);
+    rover = new Robot(new Coordinate(1, 1), Orientation.NORTH, planet);
+  });
+
+  it("ne peut pas franchir un obstacle et reste aux même coordonnées", () => {
+    rover.advance();
+    rover.advance();
+    expect(rover.coordinate.x).toEqual(1);
+    expect(rover.coordinate.y).toEqual(2);
     expect(rover.orientation).toEqual(Orientation.NORTH);
   });
 });
