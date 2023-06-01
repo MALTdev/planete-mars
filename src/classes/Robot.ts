@@ -113,6 +113,10 @@ class Robot {
       newCoordinate.y = this.planet.size;
     }
 
+    if (!this.canGoToCoordinate(newCoordinate)) {
+      return;
+    }
+
     this.coordinate = newCoordinate;
   }
 
@@ -126,6 +130,16 @@ class Robot {
       "\n" +
       "Orientation: " +
       this.orientation
+    );
+  }
+
+  private canGoToCoordinate(coordinate: Coordinate): boolean {
+    return (
+      this.planet.obstacles.findIndex(
+        (obstacle) =>
+          obstacle.coordinate.x === coordinate.x &&
+          obstacle.coordinate.y === coordinate.y
+      ) === -1
     );
   }
 }
